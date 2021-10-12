@@ -15,6 +15,7 @@ public:
     void traversing(void);
     void insertion(void);
     void deletion(void);
+    void reversing(void);
 };
 int operationWithlinkedList:: count=0;
 void operationWithlinkedList:: enterValue(void){
@@ -144,6 +145,30 @@ void operationWithlinkedList:: deletion(void){
         return deletion();
     }
 }
+void operationWithlinkedList:: reversing(void){
+    if(count==0){
+        cout<<"No value found, enter value first.\n\n";
+        return;
+    }
+    if(count==1){
+        cout<<"Reversing a single data, does not making sense.\n";
+        return;
+    }
+        operationWithlinkedList *p=NULL,*c=NULL,*a=NULL;
+            p=c=a=nodeOne;
+            c=p->nextNode;
+            a=c->nextNode;
+        while(a!=NULL){
+            c->nextNode=p;
+            p=c;
+            c=a;
+            a=a->nextNode;
+        }
+        c->nextNode=p;
+        nodeOne->nextNode=NULL;
+        lastNode=nodeOne;
+        nodeOne=c;
+}
 int main(void){
     while(true){
         int choice;
@@ -153,7 +178,8 @@ int main(void){
         cout<<"Press 2 for traversing:-\n";
         cout<<"Press 3 for insertion:-\n";
         cout<<"Press 4 for deletion:-\n";
-        cout<<"Press 5 for exit:-\n";
+        cout<<"Press 5 for reversing the data:\n";
+        cout<<"Press 6 for exit:-\n";
         cout<<"Enter your choice:";
         cin>>choice;
         switch(choice){
@@ -171,6 +197,9 @@ int main(void){
                 op1.deletion();
                 break;
             case 5:
+                op1.reversing();
+                break;
+            case 6:
                 return 0;
             default:
                 cout<<"Enter correct choice:-\n";
