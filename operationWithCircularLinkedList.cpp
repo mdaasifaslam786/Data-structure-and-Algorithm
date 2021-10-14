@@ -13,6 +13,7 @@ public:
     void traversing(void);
     void insertion(void);
     void deletion(void);
+    void reversing(void);
 };
 int circularLinkedList:: count=0;
 
@@ -143,16 +144,43 @@ void circularLinkedList:: deletion(void){
         }
     }
 }
+void circularLinkedList:: reversing(void){
+    if(count==0){
+        cout<<"There is no data, first store data.\n";
+        return;
+    }
+    if(count==1){
+        cout<<"Not making sense to reverse a single value.\n";
+        return;
+    }
+    circularLinkedList *previous=NULL,*current=NULL,*after=NULL;
+        previous=current=after=head;
+        current=previous->next;
+        after=current->next;
+        while(after!=head){
+            current->next=previous;
+            previous=current;
+            current=after;
+            after=after->next;
+        }
+        current->next=previous;
+        head->next=current;
+        head=current;
+return;
+}
+
 int main(void){
-    while(true){
-        int choice;
+    bool looping=true;
+    while(looping==true){
+            int choice;
         circularLinkedList op1;
         cout<<"Which operation you want to perform:-\n";
         cout<<"press 1 for inter value:-\n";
         cout<<"Press 2 for traversing:-\n";
         cout<<"Press 3 for insertion:-\n";
         cout<<"Press 4 for deletion:-\n";
-        cout<<"Press 5 for exit:-\n";
+        cout<<"Press 5 to reverse the data:-\n";
+        cout<<"Press 6 to exit:-\n";
         cout<<"Enter your choice:";
         cin>>choice;
         switch(choice){
@@ -170,7 +198,11 @@ int main(void){
                 op1.deletion();
                 break;
             case 5:
-                return 0;
+                op1.reversing();
+                break;
+            case 6:
+                cout<<"Program ended.\n";
+                looping=false;
                 break;
             default:
                 cout<<"Enter correct choice:-\n";

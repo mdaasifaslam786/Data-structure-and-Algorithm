@@ -1,5 +1,3 @@
-#include<conio.h>
-#include<stdio.h>
 #include<iostream>
 using namespace std;
 class operationWithArray
@@ -12,6 +10,7 @@ public:
     void traversing(void);
     void insertion(void);
     void deletion(void);
+    void reversing(void);
 };
 int operationWithArray:: insertionCheck=true;
 int operationWithArray:: siz;
@@ -99,16 +98,25 @@ void operationWithArray:: deletion(void){
         cout<<"You have successfully deleted all data.\n";
     }
 }
+void operationWithArray:: reversing(void){
+    for(int i=siz-1,j=0;i>j;i--,j++){
+        int temp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=temp;
+    }
+}
 int main(void){
-    while(true){
-        int choice;
+    bool looping=true;
+    while(looping==true){
+            int choice;
         operationWithArray op1;
         cout<<"Which operation you want to perform:-\n";
         cout<<"press 1 for inter value:-\n";
         cout<<"Press 2 for traversing:-\n";
         cout<<"Press 3 for insertion:-\n";
         cout<<"Press 4 for deletion:-\n";
-        cout<<"Press 5 for exit:-\n";
+        cout<<"Enter 5 to reverse the data:-\n";
+        cout<<"Press 6 to exit:-\n";
         cout<<"Enter your choice:";
         cin>>choice;
         switch(choice){
@@ -126,7 +134,11 @@ int main(void){
                 op1.deletion();
                 break;
             case 5:
-                return 0;
+                op1.reversing();
+                break;
+            case 6:
+                cout<<"Program ended.\n";
+                looping=false;
                 break;
             default:
                 cout<<"Enter correct choice:-\n";

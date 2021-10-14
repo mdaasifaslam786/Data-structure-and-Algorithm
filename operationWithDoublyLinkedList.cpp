@@ -14,6 +14,7 @@ public:
     void traversing(void);
     void insertion(void);
     void deletion(void);
+    void reversing(void);
 };
 int doublyLinkedList:: count=0;
 void doublyLinkedList:: enterValue(void){
@@ -140,17 +141,43 @@ void doublyLinkedList:: deletion(void){
     delete temp;
     count--;
 }
-
+void doublyLinkedList:: reversing(void){
+    if(count==0){
+        cout<<"First enter value to traverse.\n";
+        return enterValue();
+    }
+    if(count==1){
+        return;
+    }
+    doublyLinkedList *pr=NULL,*cu=NULL,*af=NULL;
+    pr=cu=af=first;
+    cu=pr->next;
+    af=cu->next;
+    while(af!=NULL){
+        cu->next=pr;
+        cu->prev=af;
+        pr=cu;
+        cu=af;
+        af=af->next;
+    }
+    cu->next=pr;
+    cu->prev=NULL;
+    first->prev=first->next;
+    first->next=NULL;
+    first=cu;
+}
 int main(void){
-while(true){
-        int choice;
+bool looping=true;
+    while(looping==true){
+            int choice;
         doublyLinkedList op1;
         cout<<"Which operation you want to perform:-\n";
         cout<<"press 1 for inter value:-\n";
         cout<<"Press 2 for traversing:-\n";
         cout<<"Press 3 for insertion:-\n";
         cout<<"Press 4 for deletion:-\n";
-        cout<<"Press 5 for exit:-\n";
+        cout<<"Press 5 to reverse the data:-\n";
+        cout<<"Press 6 to exit:-\n";
         cout<<"Enter your choice:";
         cin>>choice;
         switch(choice){
@@ -168,7 +195,11 @@ while(true){
                 op1.deletion();
                 break;
             case 5:
-                return 0;
+                op1.reversing();
+                break;
+            case 6:
+                cout<<"Program ended.\n";
+                looping=false;
                 break;
             default:
                 cout<<"Enter correct choice:-\n";
