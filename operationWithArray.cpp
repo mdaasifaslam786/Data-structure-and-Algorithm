@@ -11,6 +11,9 @@ public:
     void insertion(void);
     void deletion(void);
     void reversing(void);
+    void rotateArray(void);
+    void rearrangeData(void);
+    void smallestLargest(void);
 };
 int operationWithArray:: insertionCheck=true;
 int operationWithArray:: siz;
@@ -105,6 +108,63 @@ void operationWithArray:: reversing(void){
         arr[j]=temp;
     }
 }
+/*Rotate operation from certain position*/
+void operationWithArray:: rotateArray(void){
+    if(insertionCheck){
+        cout<<"Filled value first.\n";
+        return;
+    }
+    cout<<"After which position you want to rotate the data:";
+    int rot;
+    cin>>rot;
+    if(rot<1 || rot>=siz){
+        cout<<"Enter correct position.\n\n";
+        return rotateArray();
+    }
+    int temp[rot];
+    for(int i=0;i<rot;i++){
+        temp[i]=arr[i];
+    }
+    for(int i=0;i<siz-rot;i++){
+        arr[i]=arr[i+rot];
+        if(i==siz-rot-1){
+            int j=0;
+            while(j<rot && i<siz){
+                arr[i+1]=temp[j];
+                i++;
+                j++;
+            }
+        }
+    }
+
+}
+/* Rearrange the data such that  arr[i]=i */
+void operationWithArray:: rearrangeData(void){
+    for(int i=0;i<siz;i++){
+        for(int j=0;j<siz;j++){
+            if(arr[j]==i){
+                int temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+                break;
+            }
+        }
+    }
+}
+/* Finding largest and smallest number in array operation*/
+void operationWithArray:: smallestLargest(void){
+    int small=arr[0],large=arr[0];
+    for(int i=1;i<siz;i++){
+        if(arr[i]>large){
+            large=arr[i];
+        }
+        if(arr[i]<small){
+            small=arr[i];
+        }
+    }
+    cout<<"Smallest number:"<<small<<"\n";
+    cout<<"Largest number:"<<large<<"\n";
+}
 int main(void){
     bool looping=true;
     while(looping==true){
@@ -116,7 +176,10 @@ int main(void){
         cout<<"Press 3 for insertion:-\n";
         cout<<"Press 4 for deletion:-\n";
         cout<<"Enter 5 to reverse the data:-\n";
-        cout<<"Press 6 to exit:-\n";
+        cout<<"Enter 6 to rotate the data:-\n";
+        cout<<"Enter 7 to rearrange the data:-\n";
+        cout<<"Enter 8 to find smallest and largest number:-\n";
+        cout<<"Press 9 to exit:-\n";
         cout<<"Enter your choice:";
         cin>>choice;
         switch(choice){
@@ -137,6 +200,15 @@ int main(void){
                 op1.reversing();
                 break;
             case 6:
+                op1.rotateArray();
+                break;
+            case 7:
+                op1.rearrangeData();
+                break;
+            case 8:
+                op1.smallestLargest();
+                break;
+            case 9:
                 cout<<"Program ended.\n";
                 looping=false;
                 break;
